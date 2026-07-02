@@ -1,5 +1,6 @@
 from agents.master_agent import MasterAgent
 from utils.logger import Logger
+from utils.file_manager import FileManager
 
 
 def main():
@@ -10,6 +11,14 @@ def main():
     agent = MasterAgent()
     agent.start()
 
+    FileManager.create_folder("videos/Test Project")
+
+    FileManager.save_text(
+        "videos/Test Project/script.txt",
+        "This is our first AI generated script."
+    )
+
+    logger.info("Test files created successfully.")
     logger.info("Application Started Successfully")
 
 
