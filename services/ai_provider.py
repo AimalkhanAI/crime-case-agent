@@ -1,4 +1,8 @@
-from config.settings import AI_PROVIDER, AI_MODEL
+from config.settings import (
+    AI_PROVIDER,
+    AI_MODEL,
+    OPENROUTER_API_KEY
+)
 
 
 class AIProvider:
@@ -13,6 +17,11 @@ class AIProvider:
         print(f"Provider : {self.provider}")
         print(f"Model    : {self.model}")
         print("=================================\n")
+
+        if OPENROUTER_API_KEY:
+            print("✅ API Key Loaded Successfully\n")
+        else:
+            print("❌ No API Key Found\n")
 
         print("Sending Prompt to AI...\n")
         print(prompt)

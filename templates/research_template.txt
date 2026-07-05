@@ -1,0 +1,11 @@
+Research this crime case.
+
+Topic:
+
+{topic}
+
+Provide:
+
+1. Summary
+2. Timeline
+3. Interesting Facts

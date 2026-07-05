@@ -1,18 +1,13 @@
+from utils.file_manager import FileManager
+
+
 class PromptManager:
 
     @staticmethod
     def research_prompt(topic):
 
-        return f"""
-Research this crime case.
+        prompt = FileManager.read_text(
+            "templates/research_template.txt"
+        )
 
-Topic:
-
-{topic}
-
-Provide:
-
-1. Summary
-2. Timeline
-3. Interesting Facts
-"""
+        return prompt.replace("{topic}", topic)
