@@ -1,11 +1,26 @@
-Research this crime case.
+You are an expert crime documentary researcher.
+
+Research the following crime case.
 
 Topic:
 
 {topic}
 
-Provide:
+Return ONLY valid JSON in this format:
 
-1. Summary
-2. Timeline
-3. Interesting Facts
+{
+  "summary": "...",
+  "timeline": [
+    "...",
+    "...",
+    "..."
+  ],
+  "interesting_facts": [
+    "...",
+    "..."
+  ]
+}
+
+Do not include markdown.
+Do not include explanations.
+Return JSON only.

@@ -6,6 +6,7 @@ from utils.file_manager import FileManager
 
 
 def main():
+
     logger = Logger()
 
     logger.info("CrimeCase AI Studio Started")
@@ -13,31 +14,37 @@ def main():
     agent = MasterAgent()
     agent.start()
 
-    # Research
-    research_agent = ResearchAgent()
-    video = research_agent.research("The Zodiac Killer")
+    try:
 
-    print("\nResearch Result:\n")
-    print(video.title)
-    print(video.summary)
+        # Research
+        research_agent = ResearchAgent()
+        video = research_agent.research("The Zodiac Killer")
 
-    # Script Writing
-    script_writer = ScriptWriter()
-    video = script_writer.write_script(video)
+        print("\nResearch Result:\n")
+        print(video.title)
+        print(video.summary)
 
-    print("\nGenerated Script:\n")
-    print(video.script)
+        # Script Writing
+        script_writer = ScriptWriter()
+        video = script_writer.write_script(video)
 
-    # Save Script
-    FileManager.create_folder("videos/Test Project")
+        print("\nGenerated Script:\n")
+        print(video.script)
 
-    FileManager.save_text(
-        "videos/Test Project/script.txt",
-        video.script
-    )
+        # Save Script
+        FileManager.create_folder("videos/Test Project")
 
-    logger.info("Test files created successfully.")
-    logger.info("Application Started Successfully")
+        FileManager.save_text(
+            "videos/Test Project/script.txt",
+            video.script
+        )
+
+        logger.info("Test files created successfully.")
+        logger.info("Application Started Successfully")
+
+    except Exception as e:
+
+        logger.error(str(e))
 
 
 if __name__ == "__main__":

@@ -1,3 +1,5 @@
+import json
+
 from models.video import Video
 from services.ai_provider import AIProvider
 from services.prompt_manager import PromptManager
@@ -15,24 +17,25 @@ class ResearchAgent:
         prompt = PromptManager.research_prompt(topic)
 
         ai_response = self.ai.generate(prompt)
+        ai_response = ai_response.replace("```json", "")
+        ai_response = ai_response.replace("```", "")
+        ai_response = ai_response.strip()
+
+        try:
+            data = json.loads(ai_response)
+        except json.JSONDecodeError:
+            raise Exception(
+                "AI did not return valid JSON.\n\n"
+                f"Response was:\n{ai_response}"
+            )
 
         video = Video()
 
         video.title = topic
         video.topic = topic
 
-        # Temporary sample data
-        video.summary = "This is a sample research summary."
-
-        video.timeline = [
-            "Event 1",
-            "Event 2",
-            "Event 3"
-        ]
-
-        video.interesting_facts = [
-            "Fact 1",
-            "Fact 2"
-        ]
+        video.summary = data["summary"]
+        video.timeline = data["timeline"]
+        video.interesting_facts = data["interesting_facts"]
 
         return video
